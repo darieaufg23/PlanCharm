@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вхід</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 100px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        button[type="submit"], button[type="button"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button[type="submit"]:hover, button[type="button"]:hover {
+            background-color: #45a049;
+        }
+        .register-btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            background-color: #ff6f61; /* Червоний колір */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .register-btn:hover {
+            background-color: #ff8f82; /* Зміна колір при наведенні */
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 250px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Вхід</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Ім'я користувача"><br>
+        <input type="password" name="password" placeholder="Пароль"><br>
+        <button type="submit">Увійти</button>
+    </form>
+    <p>Ще не зареєстровані? <a href="{% url 'register' %}" class="register-btn" style="background-color: #6495ED;">Зареєструватися</a></p>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

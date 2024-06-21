@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Реєстрація</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 100px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        button[type="submit"], button[type="button"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button[type="submit"]:hover, button[type="button"]:hover {
+            background-color: #45a049;
+        }
+        .register-btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            background-color: #ff6f61; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .register-btn:hover {
+            background-color: #ff8f82;
+        }
+        .login-btn {
+            padding: 6px 12px; /* Зменшені розміри кнопки */
+            font-size: 14px; /* Зменшений розмір шрифту */
+            background-color: #6495ED; /* Інший колір */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .login-btn:hover {
+            background-color: #4169E1; /* Колір при наведенні */
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 250px;
+            margin-bottom: 10px;
+        }
+        input[type="text"]::placeholder, input[type="password"]::placeholder {
+            color: #aaa; /* Колір підказки */
+            font-size: 12px; /* Зменшений розмір шрифту підказки */
+        }
+    </style>
+</head>
+<body>
+    <h2>Реєстрація</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="register-btn">Зареєструватися</button>
+    </form>
+    <p>Вже зареєстровані? <a href="{% url 'login' %}" class="login-btn">Вхід</a></p>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <script>
+        var inputField = document.querySelector('input[type="text"]');
+        inputField.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                this.setAttribute('maxlength', '150');
+            } else {
+                this.removeAttribute('maxlength');
+            }
+        });
+    </script>
+</body>
+</html>
